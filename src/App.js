@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Weather from "./services/weather-service";
+import Weather from "./services/weather/weather-service";
 import ProbabilityForcast from "./services/Probabilityforecast-service";
 import Navbar from "./components/navbar/navbar";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import News from "./components/news";
+import News from "./services/news";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
