@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(1),
-    fontSize: 50,
+    fontSize: 40,
     textAlign: "center",
     boxShadow: "none",
     color: "#FFFFFF",
@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     padding: 0,
-  },
-  media: {
-    marginLeft: "auto",
-    height: 70,
-    width: 70,
-    marginTop: "30",
   },
 }));
 
@@ -41,7 +35,11 @@ export default function Navbar() {
           </Paper>
         </Grid>
         <Grid item xs>
-          <img src={Logo} alt="Nettbureau" />
+          <img
+            src={Logo}
+            style={{ height: 100, width: 350 }}
+            alt="Nettbureau"
+          />
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>

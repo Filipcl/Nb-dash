@@ -1,5 +1,5 @@
 import React from "react";
-import Moment from "react-moment";
+import moment from "moment";
 import { useState, useEffect } from "react";
 
 export default function ShowDate() {
@@ -16,5 +16,5 @@ export default function ShowDate() {
   function tick() {
     setDate(new Date());
   }
-  return <Moment format="dddd DD MMM">{date.toUTCString()}</Moment>;
+  return <div>{moment(date).format("dddd DD MMM")}</div>;
 }
