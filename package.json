@@ -14,12 +14,14 @@
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "prop-types": "^15.7.2",
+    "pure-react-carousel": "^1.27.1",
     "ra-data-json-server": "^3.7.0",
     "react": "^16.13.1",
     "react-admin": "^3.7.1",
     "react-dom": "^16.13.1",
-    "react-moment": "^0.9.7",
-    "react-scripts": "3.4.1"
+    "react-flip-move": "^3.0.4",
+    "react-scripts": "3.4.1",
+    "uuidv4": "^6.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
