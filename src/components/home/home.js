@@ -7,6 +7,7 @@ import News from "../news/news";
 import Carousel from "../carousel/carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import RuterService from "../../services/ruter-service";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#4b71b5",
       cursor: "pointer",
+    },
+    paper: {
+      flexGrow: 1,
+      backgroundColor: "#1d4a62",
+      boxShadow: "none",
     },
   },
 }));
@@ -53,6 +59,9 @@ function Home() {
           <Grid item xs={3} zeroMinWidth>
             <News />
           </Grid>
+        </Grid>
+        <Grid item xs={8}>
+          <RuterService />
         </Grid>
         <Link
           className={classes.linkBtn}
