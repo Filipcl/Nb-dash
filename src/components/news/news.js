@@ -40,7 +40,7 @@ function News() {
     axios.get(url).then((response) => {
       setData(response.data);
     });
-  }, [data]);
+  }, []);
 
   if (!data) {
     return "loading...";
