@@ -6,16 +6,19 @@ import Typography from "@material-ui/core/Typography";
 import moment from "moment";
 import { WeatherSymbol } from "@yr/weather-symbols";
 
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import iconList from "./iconList.json";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#21374a",
-    padding: 40,
+    minWidth: 275,
   },
-  iconGrid: {
-    justifyContent: "center",
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
   },
 });
 
@@ -57,30 +60,22 @@ function Weather() {
   }
 
   return (
-    <Grid className={classes.root}>
-      <Grid item xs>
-        <Grid item container direction="row" className={classes.iconGrid}>
-          <Grid item>
-            <WeatherSymbol id={getIcon()} type="img" rootImagePath="/png/48/" />
-          </Grid>
-          <Grid item>
-            <Typography variant="h3">
-              {weather?.data?.instant?.details?.air_temperature + "°" ?? "-"}
-            </Typography>
-          </Grid>
-        </Grid>
-
-        <Grid item>
-          <Typography>
-            {weather?.data?.next_1_hours?.details?.precipitation_amount +
-              " mm" ?? "-"}
-          </Typography>
-          <Typography>
-            {weather?.data?.instant?.details?.wind_speed + " m/s" ?? "-"}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Grid>
+    <Card className={classes.root}>
+      <CardContent>
+        <WeatherSymbol id={getIcon()} type="img" rootImagePath="/png/48/" />
+        <Typography variant="h3">
+          {Math.round(weather?.data?.instant?.details?.air_temperature) + "°" ??
+            "-"}
+        </Typography>
+        <Typography>
+          {weather?.data?.next_1_hours?.details?.precipitation_amount + " mm" ??
+            "-"}
+        </Typography>
+        <Typography>
+          {weather?.data?.instant?.details?.wind_speed + " m/s" ?? "-"}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

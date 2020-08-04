@@ -1,17 +1,13 @@
 * {
-  color: #ffffff;
+  color: #222;
 }
 
 body {
-  background-color: #1d4a62 !important;
+  background-color: #f7f8f8;
 }
 ::-webkit-scrollbar {
   display: none;
 }
 .App {
   text-align: center;
-}
-
-.paper {
-  background-color: #1d4a62;
 }

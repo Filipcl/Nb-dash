@@ -16,5 +16,7 @@ export default function ShowDate() {
   function tick() {
     setDate(new Date());
   }
-  return <div>{moment(date).format("dddd DD MMM")}</div>;
+  return (
+    <div style={{ color: "#fff" }}>{moment(date).format("dddd DD MMM")}</div>
+  );
 }

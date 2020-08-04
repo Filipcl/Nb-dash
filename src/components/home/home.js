@@ -1,5 +1,6 @@
 import React from "react";
 import Weather from "../weather/weather-service";
+import Citybike from "../citybike/citybike";
 import ProbabilityForcast from "../Probabilityforecast-service";
 import Navbar from "../navbar/navbar";
 import Grid from "@material-ui/core/Grid";
@@ -11,12 +12,12 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     justifyContent: "space-evenly",
-    margin: 15,
+    margin: 40,
   },
   linkBtn: {
     fontSize: "0.6em",
     padding: "15px",
-    backgroundColor: "#21374a",
+    backgroundColor: "#0e1e24",
     borderRadius: "5px",
     border: "none",
     color: "#FFF",
@@ -43,6 +44,8 @@ function Home() {
           </Grid>
           <Grid item xs={3} zeroMinWidth>
             <Weather />
+            <br />
+            <Citybike />
           </Grid>
         </Grid>
 

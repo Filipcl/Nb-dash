@@ -15,11 +15,10 @@ function Carousel() {
       <Slider>
         <Slide className="slide" index={0}>
           <iframe
-            title="Graph1"
             width="750"
             height="464"
             seamless
-            frameBorder="0"
+            frameborder="0"
             scrolling="no"
             src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQerZOGkM4-4slIOiDVLD4fJbtU_13a4O0A75ZBPXlWLbPMjhtMkVCNfQCjU5jO3dE_secXVU4bSG6q/pubchart?oid=171757654&amp;format=interactive"
           ></iframe>
