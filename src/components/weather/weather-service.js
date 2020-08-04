@@ -9,16 +9,19 @@ import { WeatherSymbol } from "@yr/weather-symbols";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import iconList from "./iconList.json";
+import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
+  weatherContent: {
+    padding: "30px",
+    justifyContent: "center",
   },
-  title: {
-    fontSize: 14,
+  componentPadding: {
+    paddingRight: "20px",
+    paddingLeft: "30px",
   },
-  pos: {
-    marginBottom: 12,
+  weatherInfogrid: {
+    textAlign: "left",
   },
 });
 
@@ -62,18 +65,22 @@ function Weather() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <WeatherSymbol id={getIcon()} type="img" rootImagePath="/png/48/" />
-        <Typography variant="h3">
-          {Math.round(weather?.data?.instant?.details?.air_temperature) + "°" ??
-            "-"}
-        </Typography>
-        <Typography>
-          {weather?.data?.next_1_hours?.details?.precipitation_amount + " mm" ??
-            "-"}
-        </Typography>
-        <Typography>
-          {weather?.data?.instant?.details?.wind_speed + " m/s" ?? "-"}
-        </Typography>
+        <Grid container className={classes.weatherContent}>
+          <WeatherSymbol id={getIcon()} type="img" rootImagePath="/png/48/" />
+          <Typography className={classes.componentPadding} variant="h3">
+            {Math.round(weather?.data?.instant?.details?.air_temperature) +
+              "°" ?? "-"}
+          </Typography>
+          <Grid className={classes.weatherInfogrid}>
+            <Typography>
+              {weather?.data?.next_1_hours?.details?.precipitation_amount +
+                " mm" ?? "-"}
+            </Typography>
+            <Typography>
+              {weather?.data?.instant?.details?.wind_speed + " m/s" ?? "-"}
+            </Typography>
+          </Grid>
+        </Grid>
       </CardContent>
     </Card>
   );
