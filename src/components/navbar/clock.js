@@ -17,5 +17,9 @@ export default function Clock() {
     setDate(new Date());
   }
 
-  return <div>{moment(time.getTime()).format("HH:mm")}</div>;
+  return (
+    <div style={{ color: "#fff" }}>
+      {moment(time.getTime()).format("HH:mm")}
+    </div>
+  );
 }

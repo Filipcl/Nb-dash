@@ -10,17 +10,20 @@ import ShowDate from "./date";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: "#0e1e24",
   },
   paper: {
     padding: theme.spacing(1),
     fontSize: 40,
     textAlign: "center",
     boxShadow: "none",
-    color: "#FFFFFF",
-    backgroundColor: "#1d4a62",
+    backgroundColor: "#0e1e24",
   },
   gridContainer: {
     padding: 0,
+  },
+  gridItem: {
+    alignSelf: "center",
   },
 }));
 
@@ -29,19 +32,19 @@ export default function Navbar() {
   return (
     <div className={classes.root}>
       <Grid className={classes.gridContainer} container>
-        <Grid item xs>
+        <Grid item xs className={classes.gridItem}>
           <Paper className={classes.paper}>
             <Clock />
           </Paper>
         </Grid>
-        <Grid item xs>
+        <Grid item xs className={classes.paper}>
           <img
             src={Logo}
-            style={{ height: 100, width: 350 }}
+            style={{ height: 100, width: 300 }}
             alt="Nettbureau"
           />
         </Grid>
-        <Grid item xs>
+        <Grid item xs className={classes.gridItem}>
           <Paper className={classes.paper}>
             <ShowDate />
           </Paper>

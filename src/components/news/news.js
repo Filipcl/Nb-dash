@@ -13,8 +13,7 @@ import moment from "moment";
 const useStyles = makeStyles({
   root: {
     minWidth: 400,
-    backgroundColor: "#21374a",
-    color: "#FFFFFF",
+    backgroundColor: "#fff",
     textAlign: "start",
     marginBottom: "22px",
   },
@@ -36,10 +35,16 @@ function News() {
   const url =
     " https://api.rss2json.com/v1/api.json?rss_url=https://feed.nrk.no/pan/rss/1.11001867";
 
-  useEffect(() => {
+  function updateNews() {
     axios.get(url).then((response) => {
       setData(response.data);
     });
+
+  }
+
+  useEffect(() => {
+    updateNews();
+    setInterval(() => updateNews(), 1000 * 60);
   }, []);
 
   if (!data) {

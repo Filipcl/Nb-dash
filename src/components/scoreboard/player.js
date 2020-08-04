@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
   playerName: {
     flexGrow: "1",
+    color: "#FFF",
+
     padding: "20px 10px 10px 10px",
     "&:hover": {
       "& $removePlayer": {
