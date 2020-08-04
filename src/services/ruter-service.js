@@ -154,7 +154,7 @@ function RuterService() {
 
   return (
     <Grid className={classes.grid} container spacing={2} direction="coloumn">
-      <Grid item xs={6}>
+      <Grid item xs={7}>
         <TableContainer component={Paper}>
           <Table size="small" aria-label="a dense table">
             <TableHead>
