@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import createEnturService from "@entur/sdk";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -15,12 +15,86 @@ import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   grid: {
-    margin: 20,
+    margin: 5,
   },
 });
 
-function createData(direction, time, number, id) {
-  return { direction, time, number, id };
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: "#21374a",
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+function createData(id, line, direction, time, transportMode, place) {
+  return { id, line, direction, time, transportMode, place };
+}
+
+function getCurrentTime() {
+  let currentDate = new Date();
+  return currentDate.getHours() * 60 + currentDate.getMinutes();
+}
+
+function sortList(list) {
+  return list.sort((a, b) => {
+    if (a.time > b.time) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+
+function sortDepartures(data) {
+  const walkingTime = {
+    "NSR:StopPlace:6488": 10,
+    "NSR:StopPlace:59675": 0,
+    "NSR:StopPlace:58253": 0,
+  };
+
+  let departuresSoon = [];
+  let departuresLate = [];
+
+  data.forEach((places) => {
+    places.departures.forEach((departure) => {
+      let id = uuid();
+      let line = departure.serviceJourney.journeyPattern.line.publicCode;
+      let direction = departure.destinationDisplay.frontText;
+      let time = departure.expectedDepartureTime.substr(11, 5);
+      let hours = parseInt(departure.expectedDepartureTime.substr(11, 2));
+      let minutes = parseInt(departure.expectedDepartureTime.substr(14, 2));
+      let time2 = hours * 60 + minutes;
+      let diff = time2 - getCurrentTime();
+      let transportMode = departure.serviceJourney.transportSubmode;
+      let place = departure.quay.name;
+
+      if (diff > walkingTime[places.id]) {
+        if (diff < 12) {
+          departuresSoon.push(
+            createData(id, line, direction, diff, transportMode, place)
+          );
+        } else {
+          departuresLate.push(
+            createData(id, line, direction, time, transportMode, place)
+          );
+        }
+      }
+    });
+  });
+
+  let departures = sortList(departuresSoon).concat(sortList(departuresLate));
+  return departures.slice(0, 10);
 }
 
 async function getDepartures() {
@@ -37,23 +111,7 @@ async function getDepartures() {
     }
   );
 
-  console.log(data);
-
-  let all = data.map(function (places) {
-    const departures = places.departures.map(function (departure) {
-      let direction = departure.destinationDisplay.frontText;
-      let time = departure.expectedDepartureTime.substr(11, 5);
-      let number = departure.serviceJourney.journeyPattern.line.publicCode;
-      let id = uuid();
-      return createData(direction, time, number, id);
-    });
-    return {
-      id: places.id,
-      name: places.departures?.[0]?.quay?.name ?? places.id,
-      departures,
-    };
-  });
-  return all;
+  return sortDepartures(data);
 }
 
 function RuterService() {
@@ -76,33 +134,66 @@ function RuterService() {
     return <TableContainer component={Paper}>{errorMessage}</TableContainer>;
   }
 
+  function getTransportColor(transportMode) {
+    if (transportMode === "localBus") {
+      return "#E60000";
+    }
+    if (transportMode === "localTram") {
+      return "#0973BE";
+    }
+    if (transportMode === "metro") {
+      return "#EC700C";
+    }
+  }
+
+  function checkMinutes(time) {
+    if (time < 12) {
+      return "min";
+    }
+  }
+
   return (
     <Grid className={classes.grid} container spacing={2} direction="coloumn">
-      {stops.map((stop) => (
-        <Grid item xs={4} key={stop.id}>
-          <TableContainer component={Paper}>
-            <Table size="small" aria-label="a dense table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>{stop.name}</TableCell>
-                  <TableCell align="left">Tid</TableCell>
-                </TableRow>
-              </TableHead>
+      <Grid item xs={6}>
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="a dense table">
+            <TableHead>
+              <StyledTableRow>
+                <StyledTableCell align="center">Linje</StyledTableCell>
+                <StyledTableCell align="left">Retning</StyledTableCell>
+                <StyledTableCell align="left">Tid</StyledTableCell>
+                <StyledTableCell align="left">Holdeplass</StyledTableCell>
+              </StyledTableRow>
+            </TableHead>
 
-              <TableBody>
-                {stop.departures.map((d) => (
-                  <TableRow key={d.id}>
-                    <TableCell component="th" scope="row">
-                      {d.number} {d.direction}
-                    </TableCell>
-                    <TableCell align="left">{d.time}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Grid>
-      ))}
+            <TableBody>
+              {stops.map((stop) => (
+                <StyledTableRow key={stop.id}>
+                  <StyledTableCell
+                    style={{
+                      backgroundColor: getTransportColor(stop.transportMode),
+                      color: "white",
+                      textAlign: "center",
+                      fontWeight: 600,
+                      padding: 10,
+                    }}
+                    align="left"
+                  >
+                    {stop.line}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {stop.direction}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    {stop.time} {checkMinutes(stop.time)}
+                  </StyledTableCell>
+                  <StyledTableCell align="left">{stop.place}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
     </Grid>
   );
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import Weather from "../weather/weather-service";
-import ProbabilityForcast from "../Probabilityforecast-service";
 import Navbar from "../navbar/navbar";
 import Grid from "@material-ui/core/Grid";
 import News from "../news/news";
@@ -43,9 +42,9 @@ function Home() {
     <>
       <div className="App">
         <Navbar />
-        <Grid className={classes.gridContainer} container spacing={3}>
-          <Grid item xs={6} zeroMinWidth>
-            <ProbabilityForcast />
+        <Grid container spacing={6}>
+          <Grid item xs={9}>
+            <RuterService />
           </Grid>
           <Grid item xs={3} zeroMinWidth>
             <Weather />
@@ -59,9 +58,6 @@ function Home() {
           <Grid item xs={3} zeroMinWidth>
             <News />
           </Grid>
-        </Grid>
-        <Grid item xs={8}>
-          <RuterService />
         </Grid>
         <Link
           className={classes.linkBtn}
