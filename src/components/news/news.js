@@ -39,6 +39,7 @@ function News() {
     axios.get(url).then((response) => {
       setData(response.data);
     });
+
   }
 
   useEffect(() => {

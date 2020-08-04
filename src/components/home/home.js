@@ -8,6 +8,7 @@ import News from "../news/news";
 import Carousel from "../carousel/carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import RuterService from "../../services/ruter-service";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -29,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#4b71b5",
       cursor: "pointer",
     },
+    paper: {
+      flexGrow: 1,
+      backgroundColor: "#1d4a62",
+      boxShadow: "none",
+    },
   },
 }));
 
@@ -38,9 +44,9 @@ function Home() {
     <>
       <div className="App">
         <Navbar />
-        <Grid className={classes.gridContainer} container spacing={3}>
-          <Grid item xs={6} zeroMinWidth>
-            <ProbabilityForcast />
+        <Grid container spacing={6}>
+          <Grid item xs={9}>
+            <RuterService />
           </Grid>
           <Grid item xs={3} zeroMinWidth>
             <Weather />
