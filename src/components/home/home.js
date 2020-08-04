@@ -44,8 +44,8 @@ function Home() {
     <>
       <div className="App">
         <Navbar />
-        <Grid container spacing={6}>
-          <Grid item xs={9}>
+        <Grid className={classes.gridContainer} container spacing={3}>
+          <Grid item xs={6}>
             <RuterService />
           </Grid>
           <Grid item xs={3} zeroMinWidth>

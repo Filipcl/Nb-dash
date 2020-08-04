@@ -11,7 +11,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import useInterval from "../hooks/useInterval";
 import { uuid } from "uuidv4";
-import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
   grid: {
@@ -153,48 +152,42 @@ function RuterService() {
   }
 
   return (
-    <Grid className={classes.grid} container spacing={2} direction="coloumn">
-      <Grid item xs={7}>
-        <TableContainer component={Paper}>
-          <Table size="small" aria-label="a dense table">
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell align="center">Linje</StyledTableCell>
-                <StyledTableCell align="left">Retning</StyledTableCell>
-                <StyledTableCell align="left">Tid</StyledTableCell>
-                <StyledTableCell align="left">Holdeplass</StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
+    <TableContainer component={Paper}>
+      <Table size="small" aria-label="a dense table">
+        <TableHead>
+          <StyledTableRow>
+            <StyledTableCell align="center">Linje</StyledTableCell>
+            <StyledTableCell align="left">Retning</StyledTableCell>
+            <StyledTableCell align="left">Tid</StyledTableCell>
+            <StyledTableCell align="left">Holdeplass</StyledTableCell>
+          </StyledTableRow>
+        </TableHead>
 
-            <TableBody>
-              {stops.map((stop) => (
-                <StyledTableRow key={stop.id}>
-                  <StyledTableCell
-                    style={{
-                      backgroundColor: getTransportColor(stop.transportMode),
-                      color: "white",
-                      textAlign: "center",
-                      fontWeight: 600,
-                      padding: 10,
-                    }}
-                    align="left"
-                  >
-                    {stop.line}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {stop.direction}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    {stop.time} {checkMinutes(stop.time)}
-                  </StyledTableCell>
-                  <StyledTableCell align="left">{stop.place}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
-    </Grid>
+        <TableBody>
+          {stops.map((stop) => (
+            <StyledTableRow key={stop.id}>
+              <StyledTableCell
+                style={{
+                  backgroundColor: getTransportColor(stop.transportMode),
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: 600,
+                  padding: 10,
+                }}
+                align="left"
+              >
+                {stop.line}
+              </StyledTableCell>
+              <StyledTableCell align="left">{stop.direction}</StyledTableCell>
+              <StyledTableCell align="left">
+                {stop.time} {checkMinutes(stop.time)}
+              </StyledTableCell>
+              <StyledTableCell align="left">{stop.place}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
