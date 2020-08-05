@@ -1,9 +1,6 @@
-* {
-  color: #222;
-}
-
 body {
-  background-color: #f7f8f8;
+  color: #222;
+  background-color: #21364b;
 }
 ::-webkit-scrollbar {
   display: none;

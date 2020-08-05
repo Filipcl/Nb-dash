@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Logo from "../../assets/img/nettbureau-logo-navn.svg";
+import Logo from "../../assets/img/nettbureau-logo-hvit.svg";
 
 import Clock from "./clock";
 import ShowDate from "./date";
@@ -10,14 +10,14 @@ import ShowDate from "./date";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "#0e1e24",
+    backgroundColor: "#235772",
   },
   paper: {
     padding: theme.spacing(1),
     fontSize: 40,
     textAlign: "center",
     boxShadow: "none",
-    backgroundColor: "#0e1e24",
+    backgroundColor: "#235772",
   },
   gridContainer: {
     padding: 0,
