@@ -2,35 +2,38 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import DirectionsBikeIcon from "@material-ui/icons/DirectionsBike";
 import Typography from "@material-ui/core/Typography";
 
 import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
 import CardContent from "@material-ui/core/CardContent";
+import CityBikeLogo from "../../assets/img/oslo_bysykkel_logo.svg";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#fff",
-    padding: 40,
-    border: "1px solid rgba(0, 0, 0, 0.12)",
-  },
-  iconGrid: {
+    display: "flex",
     justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: 20,
   },
-  stationName: {
-    paddingBottom: "10px",
+  container: {
+    width: "50%",
   },
-  bikeIcon: {
-    paddingRight: "10px",
+  bikeInfo: {
+    display: "flex",
+    alignItems: "center",
+  },
+  avaliableBikes: {
+    paddingLeft: 20,
   },
 });
+
 function Citybike() {
   const classes = useStyles();
 
   const [data, setData] = useState(null);
   const stationId = "507";
   const url = `https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json`;
+
   useEffect(() => {
     axios.get(url).then((response) => {
       setData(response.data.data);
@@ -49,16 +52,18 @@ function Citybike() {
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="h5">Jens Bjelkes gate</Typography>
-        <Grid item container direction="row" className={classes.iconGrid}>
-          <DirectionsBikeIcon className={classes.bikeIcon} color="primary" />
-          <Grid item>
-            <Typography variant="h6" className={classes.staionInfo}>
-              {station.num_bikes_available +
-                "/" +
-                (station.num_docks_available + station.num_bikes_available)}
-            </Typography>
-          </Grid>
-        </Grid>
+        <div className={classes.bikeInfo}>
+          <img
+            src={CityBikeLogo}
+            style={{ height: 45, width: 30 }}
+            alt="Nettbureau"
+          />
+          <Typography variant="h6" className={classes.avaliableBikes}>
+            {station.num_bikes_available +
+              "/" +
+              (station.num_docks_available + station.num_bikes_available)}
+          </Typography>
+        </div>
       </CardContent>
     </Card>
   );

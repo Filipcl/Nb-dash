@@ -12,19 +12,19 @@ import moment from "moment";
 
 const useStyles = makeStyles({
   root: {
+    padding: 10,
     minWidth: 400,
     backgroundColor: "#fff",
     textAlign: "start",
     marginBottom: "22px",
   },
-  pos: {
-    marginBottom: 12,
+  header: {
+    display: "flex",
   },
   media: {
     marginLeft: "auto",
     height: 30,
     width: 30,
-    marginTop: "30",
   },
 });
 
@@ -39,7 +39,6 @@ function News() {
     axios.get(url).then((response) => {
       setData(response.data);
     });
-
   }
 
   useEffect(() => {
@@ -67,32 +66,36 @@ function News() {
   return (
     <>
       <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5">{lastNews.title ?? "-"}</Typography>
+        <CardContent className={classes.cardContent}>
+          <div className={classes.header}>
+            <Typography variant="h5">{lastNews.title ?? "-"}</Typography>
+            <CardMedia
+              className={classes.media}
+              image={nrkLogo}
+              title="Contemplative Reptile"
+            />
+          </div>
           <Typography variant="caption">{formatPubTime(lastNews)}</Typography>
           <br />
           <br />
           <Typography variant="body1">{lastNews.description ?? "-"}</Typography>
-          <CardMedia
-            className={classes.media}
-            image={nrkLogo}
-            title="Contemplative Reptile"
-          />
         </CardContent>
       </Card>
 
       <Card className={classes.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5">{nextNews.title ?? "-"}</Typography>
+        <CardContent className={classes.cardContent}>
+          <div className={classes.header}>
+            <Typography variant="h5">{nextNews.title ?? "-"}</Typography>
+            <CardMedia
+              className={classes.media}
+              image={nrkLogo}
+              title="Contemplative Reptile"
+            />
+          </div>
           <Typography variant="caption">{formatPubTime(nextNews)}</Typography>
           <br />
           <br />
           <Typography variant="body1">{nextNews.description ?? "-"}</Typography>
-          <CardMedia
-            className={classes.media}
-            image={nrkLogo}
-            title="Contemplative Reptile"
-          />
         </CardContent>
       </Card>
     </>
