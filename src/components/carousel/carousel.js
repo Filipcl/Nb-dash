@@ -41,6 +41,7 @@ function Carousel() {
         </Slide>
         <Slide className={classes.slide} index={2}>
           <iframe
+            title="3"
             width="757"
             height="464"
             seamless
