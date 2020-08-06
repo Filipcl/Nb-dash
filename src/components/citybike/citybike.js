@@ -32,7 +32,10 @@ function Citybike() {
 
   useEffect(() => {
     axios
-      .get("https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json")
+      .get(
+        "https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json",
+        { headers: { "Client-Identifier": "Nettbureau-dashboard" } }
+      )
       .then((response) => {
         setData(response.data.data);
       });
