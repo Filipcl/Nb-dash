@@ -18,9 +18,9 @@
     "pure-react-carousel": "^1.27.1",
     "ra-data-json-server": "^3.7.0",
     "react": "^16.13.1",
-    "react-admin": "^3.7.1",
     "react-dom": "^16.13.1",
     "react-flip-move": "^3.0.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "uuidv4": "^6.2.0"
   },

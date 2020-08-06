@@ -5,8 +5,9 @@ import PlayerForm from "./player-form";
 import Player from "./player";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   scoreboard: {
+    color: "#FFF",
     backgroundColor: "#333",
     width: "700px",
     margin: "70px auto",
@@ -73,33 +74,31 @@ function Scoreboard() {
   };
 
   return (
-    <>
-      <div className={styles.scoreboard}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>Scoreboard</h1>
-        </div>
-        <div className="players">
-          <FlipMove>
-            {players.map((player, index) => {
-              return (
-                <Player
-                  onScoreChange={(delta) => {
-                    onScoreChange(index, delta);
-                  }}
-                  onRemove={() => {
-                    onRemovePlayer(index);
-                  }}
-                  name={player.name}
-                  score={player.score}
-                  key={player.id}
-                />
-              );
-            })}
-          </FlipMove>
-        </div>
-        <PlayerForm onAdd={onPlayerAdd} />
+    <div className={styles.scoreboard}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Scoreboard</h1>
       </div>
-    </>
+      <div className="players">
+        <FlipMove>
+          {players.map((player, index) => {
+            return (
+              <Player
+                onScoreChange={(delta) => {
+                  onScoreChange(index, delta);
+                }}
+                onRemove={() => {
+                  onRemovePlayer(index);
+                }}
+                name={player.name}
+                score={player.score}
+                key={player.id}
+              />
+            );
+          })}
+        </FlipMove>
+      </div>
+      <PlayerForm onAdd={onPlayerAdd} />
+    </div>
   );
 }
 

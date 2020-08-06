@@ -1,7 +1,6 @@
 import React from "react";
 import Weather from "../weather/weather-service";
 import Citybike from "../citybike/citybike";
-import ProbabilityForcast from "../Probabilityforecast-service";
 import Navbar from "../navbar/navbar";
 import Grid from "@material-ui/core/Grid";
 import News from "../news/news";
@@ -10,15 +9,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import RuterService from "../../services/ruter-service";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
+  navbar: {
+    paddingBottom: 60,
+  },
   gridContainer: {
     justifyContent: "space-evenly",
-    margin: 40,
   },
   linkBtn: {
     fontSize: "0.6em",
     padding: "15px",
-    backgroundColor: "#0e1e24",
+    backgroundColor: "#235772",
     borderRadius: "5px",
     border: "none",
     color: "#FFF",
@@ -30,11 +31,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#4b71b5",
       cursor: "pointer",
     },
-    paper: {
-      flexGrow: 1,
-      backgroundColor: "#1d4a62",
-      boxShadow: "none",
-    },
   },
 }));
 
@@ -43,33 +39,41 @@ function Home() {
   return (
     <>
       <div className="App">
-        <Navbar />
-        <Grid className={classes.gridContainer} container spacing={3}>
-          <Grid item xs={6}>
+        <div className={classes.navbar}>
+          <Navbar />
+        </div>
+        <Grid className={classes.gridContainer} container spacing={6}>
+          <Grid item xs={5}>
             <RuterService />
           </Grid>
-          <Grid item xs={3} zeroMinWidth>
-            <Weather />
-            <br />
-            <Citybike />
+          <Grid item xs={3}>
+            <Grid container direction="column" spacing={6}>
+              <Grid item>
+                <Weather />
+              </Grid>
+              <Grid item>
+                <Citybike />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
-
-        <Grid className={classes.gridContainer} container spacing={3}>
-          <Grid item xs={6} zeroMinWidth>
+        <Grid className={classes.gridContainer} container spacing={6}>
+          <Grid item xs={5}>
             <Carousel />
           </Grid>
-          <Grid item xs={3} zeroMinWidth>
+          <Grid item xs={3}>
             <News />
           </Grid>
         </Grid>
-        <Link
-          className={classes.linkBtn}
-          to={"/scoreboard"}
-          style={{ textDecoration: "none" }}
-        >
-          Go to Scoreboard
-        </Link>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Link
+            className={classes.linkBtn}
+            to={"/scoreboard"}
+            style={{ textDecoration: "none", textAlign: "center" }}
+          >
+            Go to Scoreboard
+          </Link>
+        </div>
       </div>
     </>
   );

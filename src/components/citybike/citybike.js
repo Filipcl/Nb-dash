@@ -15,9 +15,6 @@ const useStyles = makeStyles({
     backgroundColor: "#fff",
     padding: 20,
   },
-  container: {
-    width: "50%",
-  },
   bikeInfo: {
     display: "flex",
     alignItems: "center",
@@ -32,12 +29,13 @@ function Citybike() {
 
   const [data, setData] = useState(null);
   const stationId = "507";
-  const url = `https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json`;
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      setData(response.data.data);
-    });
+    axios
+      .get("https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json")
+      .then((response) => {
+        setData(response.data.data);
+      });
   }, []);
 
   if (!data) {

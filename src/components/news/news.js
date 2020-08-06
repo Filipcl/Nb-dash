@@ -1,14 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
-
-import moment from "moment";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   root: {
@@ -21,10 +20,17 @@ const useStyles = makeStyles({
   header: {
     display: "flex",
   },
+  newsTitle: {
+    fontWeight: "bold",
+  },
   media: {
     marginLeft: "auto",
     height: 30,
     width: 30,
+  },
+  caption: {
+    color: "#616161",
+    marginBottom: 20,
   },
 });
 
@@ -49,6 +55,7 @@ function News() {
   if (!data) {
     return "loading...";
   }
+
   const lastNews = data.items[0];
   const nextNews = data.items[1];
   const nrkLogo = data.feed.image;
@@ -60,7 +67,7 @@ function News() {
     return moment
       .utc(item.pubDate)
       .tz("Europe/Oslo")
-      .format("YYYY-MM-DD HH:mm");
+      .format("DD-MM-YYYY HH:mm ");
   }
 
   return (
@@ -68,7 +75,9 @@ function News() {
       <Card className={classes.root} variant="outlined">
         <CardContent className={classes.cardContent}>
           <div className={classes.header}>
-            <Typography variant="h5">{lastNews.title ?? "-"}</Typography>
+            <Typography className={classes.newsTitle} variant="h5">
+              {lastNews.title ?? "-"}
+            </Typography>
             <CardMedia
               className={classes.media}
               image={nrkLogo}
@@ -76,8 +85,6 @@ function News() {
             />
           </div>
           <Typography variant="caption">{formatPubTime(lastNews)}</Typography>
-          <br />
-          <br />
           <Typography variant="body1">{lastNews.description ?? "-"}</Typography>
         </CardContent>
       </Card>
@@ -85,7 +92,9 @@ function News() {
       <Card className={classes.root} variant="outlined">
         <CardContent className={classes.cardContent}>
           <div className={classes.header}>
-            <Typography variant="h5">{nextNews.title ?? "-"}</Typography>
+            <Typography className={classes.newsTitle} variant="h5">
+              {nextNews.title ?? "-"}
+            </Typography>
             <CardMedia
               className={classes.media}
               image={nrkLogo}

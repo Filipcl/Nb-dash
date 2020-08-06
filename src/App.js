@@ -4,14 +4,26 @@ import Scoreboard from "./components/scoreboard/scoreboard";
 import Home from "./components/home/home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { ThemeProvider } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["sofia-pro", "sans-serif"].join(","),
+    fontWeight: 500,
+  },
+});
+
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/scoreboard" exact component={Scoreboard} />
-      </Switch>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/scoreboard" component={Scoreboard} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
 }
 

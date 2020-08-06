@@ -1,16 +1,14 @@
 import { useEffect, useRef } from "react";
-
 export default function useInterval(callback, delay) {
   const savedCallback = useRef();
-
   // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
   }, [callback]);
-
   // Call immediately the first time.
-  useEffect(callback, []);
-
+  useEffect(() => {
+    callback();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   // Set up the interval.
   useEffect(() => {
     function tick() {

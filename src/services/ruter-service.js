@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import createEnturService from "@entur/sdk";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,8 +13,15 @@ import useInterval from "../hooks/useInterval";
 import { uuid } from "uuidv4";
 
 const useStyles = makeStyles({
-  grid: {
-    margin: 5,
+  tableCell: {
+    borderColor: "white",
+    border: "none",
+  },
+  lineTableCell: {
+    color: "white",
+    textAlign: "center",
+    padding: 10,
+    borderColor: "white",
   },
 });
 
@@ -28,11 +35,11 @@ const StyledTableRow = withStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: "#21374a",
+    backgroundColor: "#235772",
     color: theme.palette.common.white,
   },
   body: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }))(TableCell);
 
@@ -54,7 +61,6 @@ function sortList(list) {
     }
   });
 }
-
 function sortDepartures(data) {
   const walkingTime = {
     "NSR:StopPlace:6488": 10,
@@ -64,7 +70,6 @@ function sortDepartures(data) {
 
   let departuresSoon = [];
   let departuresLate = [];
-
   data.forEach((places) => {
     places.departures.forEach((departure) => {
       let id = uuid();
@@ -77,7 +82,6 @@ function sortDepartures(data) {
       let diff = time2 - getCurrentTime();
       let transportMode = departure.serviceJourney.transportSubmode;
       let place = departure.quay.name;
-
       if (diff > walkingTime[places.id]) {
         if (diff < 12) {
           departuresSoon.push(
@@ -91,16 +95,13 @@ function sortDepartures(data) {
       }
     });
   });
-
   let departures = sortList(departuresSoon).concat(sortList(departuresLate));
-  return departures.slice(0, 10);
+  return departures.slice(0, 9);
 }
-
 async function getDepartures() {
   const service = createEnturService({
     clientName: "Nettbureau-reiseplanlegger",
   });
-
   let data = await service.getDeparturesFromStopPlaces(
     ["NSR:StopPlace:59675", "NSR:StopPlace:58253", "NSR:StopPlace:6488"],
     {
@@ -109,16 +110,12 @@ async function getDepartures() {
       includeNonBoarding: false,
     }
   );
-
   return sortDepartures(data);
 }
-
 function RuterService() {
   const classes = useStyles();
-
   const [stops, setStops] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-
   useInterval(async () => {
     try {
       const stops = await getDepartures();
@@ -127,15 +124,13 @@ function RuterService() {
     } catch (error) {
       setErrorMessage("Failed to fetch ruter-departures.");
     }
-  }, 1000 * 40);
-
+  }, 1000 * 10);
   if (errorMessage) {
     return <TableContainer component={Paper}>{errorMessage}</TableContainer>;
   }
-
   function getTransportColor(transportMode) {
     if (transportMode === "localBus") {
-      return "#E60000";
+      return "#FF462F";
     }
     if (transportMode === "localTram") {
       return "#0973BE";
@@ -144,17 +139,20 @@ function RuterService() {
       return "#EC700C";
     }
   }
-
   function checkMinutes(time) {
     if (time < 12) {
       return "min";
     }
   }
-
   return (
     <TableContainer component={Paper}>
-      <Table size="small" aria-label="a dense table">
-        <TableHead>
+      <Table
+        className={classes.table}
+        style={{ width: "101%" }}
+        size="small"
+        aria-label="a dense table"
+      >
+        <TableHead className={classes.head}>
           <StyledTableRow>
             <StyledTableCell align="center">Linje</StyledTableCell>
             <StyledTableCell align="left">Retning</StyledTableCell>
@@ -162,27 +160,27 @@ function RuterService() {
             <StyledTableCell align="left">Holdeplass</StyledTableCell>
           </StyledTableRow>
         </TableHead>
-
         <TableBody>
           {stops.map((stop) => (
             <StyledTableRow key={stop.id}>
               <StyledTableCell
+                className={classes.lineTableCell}
                 style={{
                   backgroundColor: getTransportColor(stop.transportMode),
-                  color: "white",
-                  textAlign: "center",
-                  fontWeight: 600,
-                  padding: 10,
                 }}
                 align="left"
               >
                 {stop.line}
               </StyledTableCell>
-              <StyledTableCell align="left">{stop.direction}</StyledTableCell>
-              <StyledTableCell align="left">
+              <StyledTableCell className={classes.tableCell} align="left">
+                {stop.direction}
+              </StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
                 {stop.time} {checkMinutes(stop.time)}
               </StyledTableCell>
-              <StyledTableCell align="left">{stop.place}</StyledTableCell>
+              <StyledTableCell className={classes.tableCell} align="left">
+                {stop.place}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -190,5 +188,4 @@ function RuterService() {
     </TableContainer>
   );
 }
-
 export default RuterService;

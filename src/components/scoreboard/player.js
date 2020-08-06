@@ -14,16 +14,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "10px",
     color: "#e57373",
     cursor: "pointer",
+    textDecoration: "none",
   },
-
   playerName: {
     flexGrow: "1",
     color: "#FFF",
-
     padding: "20px 10px 10px 10px",
     "&:hover": {
       "& $removePlayer": {
         visibility: "visible",
+        background: "none",
+        border: "none",
       },
     },
   },
@@ -39,9 +40,9 @@ function Player(props, ref) {
   return (
     <div ref={ref} className={styles.player}>
       <div className={styles.playerName}>
-        <a className={styles.removePlayer} onClick={props.onRemove}>
+        <button className={styles.removePlayer} onClick={props.onRemove}>
           ✖
-        </a>
+        </button>
         {props.name}
       </div>
       <div className={styles.playerScore}>

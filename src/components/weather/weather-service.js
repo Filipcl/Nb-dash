@@ -12,9 +12,14 @@ import iconList from "./iconList.json";
 import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles({
+  root: {
+    justifyItems: "center",
+    width: "100%",
+  },
   weatherContent: {
     padding: "30px",
     justifyContent: "center",
+    alignItems: "center",
   },
   componentPadding: {
     paddingRight: "20px",
@@ -31,15 +36,18 @@ function Weather() {
   const [data, setData] = useState(null);
   const lat = "59.919159";
   const lon = "10.764486";
-  const url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`;
 
   const newdate = moment().startOf("hour");
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      setData(response.data);
-    });
-  }, []);
+    axios
+      .get(
+        `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${lat}&lon=${lon}`
+      )
+      .then((response) => {
+        setData(response.data);
+      });
+  }, [lat, lon]);
 
   if (!data) {
     return "loading...";
