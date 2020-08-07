@@ -58,6 +58,7 @@ function News() {
 
   const lastNews = data.items[0];
   const nextNews = data.items[1];
+  const evenNexterNews = data.items[2];
   const nrkLogo = data.feed.image;
 
   function formatPubTime(item) {
@@ -108,6 +109,29 @@ function News() {
             </Typography>
           </Box>
           <Typography variant="body1">{nextNews.description ?? "-"}</Typography>
+        </CardContent>
+      </Card>
+
+      <Card className={classes.root} variant="outlined">
+        <CardContent className={classes.cardContent}>
+          <div className={classes.header}>
+            <Typography className={classes.newsTitle} variant="h5">
+              {evenNexterNews.title ?? "-"}
+            </Typography>
+            <CardMedia
+              className={classes.media}
+              image={nrkLogo}
+              title="Contemplative Reptile"
+            />
+          </div>
+          <Box mb={1}>
+            <Typography color="textSecondary">
+              {formatPubTime(evenNexterNews)}
+            </Typography>
+          </Box>
+          <Typography variant="body1">
+            {evenNexterNews.description ?? "-"}
+          </Typography>
         </CardContent>
       </Card>
     </>

@@ -11,10 +11,6 @@ import RuterService from "../../services/ruter-service";
 import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
-  navbar: {
-    paddingBottom: 60,
-  },
-
   linkBtn: {
     fontSize: "0.6em",
     padding: "15px",
@@ -39,33 +35,35 @@ function Home() {
       <div className={classes.navbar}>
         <Navbar />
       </div>
-      <Grid container spacing={3}>
-        <Grid item xs={7}>
-          <Grid container spacing={3} direction="column">
-            <Grid item>
-              <RuterService />
-            </Grid>
-            <Grid item>
-              <Carousel />
+      <Box p={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={7}>
+            <Grid container spacing={3} direction="column">
+              <Grid item>
+                <RuterService />
+              </Grid>
+              <Grid item>
+                <Carousel />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={5}>
-          <>
-            <Box mb={3}>
-              <Grid container spacing={3}>
-                <Grid item xs>
-                  <Weather />
+          <Grid item xs={5}>
+            <>
+              <Box mb={3}>
+                <Grid container spacing={3}>
+                  <Grid item xs>
+                    <Weather />
+                  </Grid>
+                  <Grid item xs>
+                    <Citybike />
+                  </Grid>
                 </Grid>
-                <Grid item xs>
-                  <Citybike />
-                </Grid>
-              </Grid>
-            </Box>
-            <News />
-          </>
+              </Box>
+              <News />
+            </>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
       <Link
         className={classes.linkBtn}
         to={"/scoreboard"}
