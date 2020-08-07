@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import moment from "moment";
 import "moment-timezone";
 import "moment/locale/nb";
 moment.locale("nb");
