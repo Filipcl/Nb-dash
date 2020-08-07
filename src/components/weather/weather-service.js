@@ -74,7 +74,11 @@ function Weather() {
       <CardContent>
         <Grid container className={classes.weatherContent}>
           <WeatherSymbol id={getIcon()} type="img" rootImagePath="/png/48/" />
-          <Typography className={classes.componentPadding} variant="h3">
+          <Typography
+            className={classes.componentPadding}
+            style={{ fontWeight: 600 }}
+            variant="h3"
+          >
             {Math.round(weather?.data?.instant?.details?.air_temperature) +
               "°" ?? "-"}
           </Typography>

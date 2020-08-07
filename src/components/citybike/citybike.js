@@ -63,7 +63,11 @@ function Citybike() {
             style={{ height: 45, width: 30 }}
             alt="Nettbureau"
           />
-          <Typography variant="h4" className={classes.avaliableBikes}>
+          <Typography
+            style={{ fontWeight: 600 }}
+            variant="h4"
+            className={classes.avaliableBikes}
+          >
             {station.num_bikes_available +
               "/" +
               (station.num_docks_available + station.num_bikes_available)}

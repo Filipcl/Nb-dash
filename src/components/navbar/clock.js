@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import moment from "moment";
+import { Typography } from "@material-ui/core";
 
 export default function Clock() {
   const [time, setDate] = useState(new Date());
@@ -18,8 +19,8 @@ export default function Clock() {
   }
 
   return (
-    <div style={{ fontWeight: 800, color: "#fff" }}>
+    <Typography variant="h2" style={{ fontWeight: 600, color: "#FFF" }}>
       {moment(time.getTime()).format("HH:mm")}
-    </div>
+    </Typography>
   );
 }

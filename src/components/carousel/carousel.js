@@ -20,7 +20,7 @@ function Carousel() {
         <Slide className={classes.slide} index={0}>
           <iframe
             title="1"
-            width="750"
+            width="100%"
             height="464"
             seamless
             frameBorder="0"
@@ -31,7 +31,7 @@ function Carousel() {
         <Slide className={classes.slide} index={1}>
           <iframe
             title="2"
-            width="757"
+            width="100%"
             height="464"
             seamless
             frameBorder="0"
@@ -42,7 +42,7 @@ function Carousel() {
         <Slide className={classes.slide} index={2}>
           <iframe
             title="3"
-            width="757"
+            width="100%"
             height="464"
             seamless
             frameborder="0"

@@ -9,8 +9,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ["sofia-pro", "sans-serif"].join(","),
-    fontWeight: 500,
+    fontFamily: ["Poppins", "sans-serif"].join(","),
   },
 });
 

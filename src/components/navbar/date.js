@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { useState, useEffect } from "react";
+import Typography from "@material-ui/core/Typography";
 
 export default function ShowDate() {
   const [date, setDate] = useState(new Date());
@@ -16,9 +17,14 @@ export default function ShowDate() {
   function tick() {
     setDate(new Date());
   }
+
+  function getDate() {
+    const formattedDate = moment(date).format("dddd DD MMM");
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+  }
   return (
-    <div style={{ fontWeight: 800, color: "#fff" }}>
-      {moment(date).format("dddd DD MMM")}
-    </div>
+    <Typography variant="h3" style={{ fontWeight: 600, color: "#FFF" }}>
+      {getDate()}
+    </Typography>
   );
 }

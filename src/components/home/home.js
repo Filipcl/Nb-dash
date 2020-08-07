@@ -63,14 +63,16 @@ function Home() {
             </>
           </Grid>
         </Grid>
+        <Box position={"absolute"} bottom={0}>
+          <Link
+            className={classes.linkBtn}
+            to={"/scoreboard"}
+            style={{ textDecoration: "none", textAlign: "center" }}
+          >
+            Go to Scoreboard
+          </Link>
+        </Box>
       </Box>
-      <Link
-        className={classes.linkBtn}
-        to={"/scoreboard"}
-        style={{ textDecoration: "none", textAlign: "center" }}
-      >
-        Go to Scoreboard
-      </Link>
     </>
   );
 }
