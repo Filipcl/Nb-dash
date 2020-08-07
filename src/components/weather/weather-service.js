@@ -14,7 +14,6 @@ import { Grid } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
     justifyItems: "center",
-    width: "100%",
   },
   weatherContent: {
     padding: "30px",

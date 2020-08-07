@@ -2,12 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-
+import "moment/locale/nb";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+
+moment.locale("nb");
 
 const useStyles = makeStyles({
   root: {
@@ -64,10 +67,7 @@ function News() {
     if (!item.pubDate) {
       return "-";
     }
-    return moment
-      .utc(item.pubDate)
-      .tz("Europe/Oslo")
-      .format("DD-MM-YYYY HH:mm ");
+    return moment.utc(item.pubDate).tz("Europe/Oslo").locale("no").fromNow();
   }
 
   return (
@@ -84,7 +84,11 @@ function News() {
               title="Contemplative Reptile"
             />
           </div>
-          <Typography variant="caption">{formatPubTime(lastNews)}</Typography>
+          <Box mb={1}>
+            <Typography color="textSecondary">
+              {formatPubTime(nextNews)}
+            </Typography>
+          </Box>
           <Typography variant="body1">{lastNews.description ?? "-"}</Typography>
         </CardContent>
       </Card>
@@ -101,9 +105,11 @@ function News() {
               title="Contemplative Reptile"
             />
           </div>
-          <Typography variant="caption">{formatPubTime(nextNews)}</Typography>
-          <br />
-          <br />
+          <Box mb={1}>
+            <Typography color="textSecondary">
+              {formatPubTime(nextNews)}
+            </Typography>
+          </Box>
           <Typography variant="body1">{nextNews.description ?? "-"}</Typography>
         </CardContent>
       </Card>

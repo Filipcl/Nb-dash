@@ -18,6 +18,8 @@ const useStyles = makeStyles({
   bikeInfo: {
     display: "flex",
     alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
   },
   avaliableBikes: {
     paddingLeft: 20,
@@ -52,14 +54,16 @@ function Citybike() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5">Jens Bjelkes gate</Typography>
+        <Typography variant="h6" color="textSecondary">
+          Jens Bjelkes gate
+        </Typography>
         <div className={classes.bikeInfo}>
           <img
             src={CityBikeLogo}
             style={{ height: 45, width: 30 }}
             alt="Nettbureau"
           />
-          <Typography variant="h6" className={classes.avaliableBikes}>
+          <Typography variant="h4" className={classes.avaliableBikes}>
             {station.num_bikes_available +
               "/" +
               (station.num_docks_available + station.num_bikes_available)}

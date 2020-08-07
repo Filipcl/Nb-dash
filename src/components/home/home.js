@@ -8,14 +8,13 @@ import Carousel from "../carousel/carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import RuterService from "../../services/ruter-service";
+import { Card, CardContent, Box } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   navbar: {
     paddingBottom: 60,
   },
-  gridContainer: {
-    justifyContent: "space-evenly",
-  },
+
   linkBtn: {
     fontSize: "0.6em",
     padding: "15px",
@@ -33,48 +32,47 @@ const useStyles = makeStyles(() => ({
     },
   },
 }));
-
 function Home() {
   const classes = useStyles();
   return (
     <>
-      <div className="App">
-        <div className={classes.navbar}>
-          <Navbar />
-        </div>
-        <Grid className={classes.gridContainer} container spacing={6}>
-          <Grid item xs={5}>
-            <RuterService />
-          </Grid>
-          <Grid item xs={3}>
-            <Grid container direction="column" spacing={6}>
-              <Grid item>
-                <Weather />
-              </Grid>
-              <Grid item>
-                <Citybike />
-              </Grid>
+      <div className={classes.navbar}>
+        <Navbar />
+      </div>
+      <Grid container spacing={3}>
+        <Grid item xs={7}>
+          <Grid container spacing={3} direction="column">
+            <Grid item>
+              <RuterService />
+            </Grid>
+            <Grid item>
+              <Carousel />
             </Grid>
           </Grid>
         </Grid>
-        <Grid className={classes.gridContainer} container spacing={6}>
-          <Grid item xs={5}>
-            <Carousel />
-          </Grid>
-          <Grid item xs={3}>
+        <Grid item xs={5}>
+          <>
+            <Box mb={3}>
+              <Grid container spacing={3}>
+                <Grid item xs>
+                  <Weather />
+                </Grid>
+                <Grid item xs>
+                  <Citybike />
+                </Grid>
+              </Grid>
+            </Box>
             <News />
-          </Grid>
+          </>
         </Grid>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Link
-            className={classes.linkBtn}
-            to={"/scoreboard"}
-            style={{ textDecoration: "none", textAlign: "center" }}
-          >
-            Go to Scoreboard
-          </Link>
-        </div>
-      </div>
+      </Grid>
+      <Link
+        className={classes.linkBtn}
+        to={"/scoreboard"}
+        style={{ textDecoration: "none", textAlign: "center" }}
+      >
+        Go to Scoreboard
+      </Link>
     </>
   );
 }
