@@ -18,7 +18,7 @@ export default function Clock() {
   }
 
   return (
-    <div style={{ color: "#fff" }}>
+    <div style={{ fontWeight: 800, color: "#fff" }}>
       {moment(time.getTime()).format("HH:mm")}
     </div>
   );

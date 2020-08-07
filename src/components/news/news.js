@@ -2,15 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
-import "moment/locale/nb";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-
-moment.locale("nb");
 
 const useStyles = makeStyles({
   root: {

@@ -8,7 +8,7 @@ import Carousel from "../carousel/carousel";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import RuterService from "../../services/ruter-service";
-import { Card, CardContent, Box } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   navbar: {

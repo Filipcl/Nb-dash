@@ -17,6 +17,8 @@ export default function ShowDate() {
     setDate(new Date());
   }
   return (
-    <div style={{ color: "#fff" }}>{moment(date).format("dddd DD MMM")}</div>
+    <div style={{ fontWeight: 800, color: "#fff" }}>
+      {moment(date).format("dddd DD MMM")}
+    </div>
   );
 }
